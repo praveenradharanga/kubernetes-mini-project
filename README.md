@@ -1,3 +1,30 @@
+               Project Architecture
+                     Internet
+                         │
+                         ▼
+                  NGINX Ingress
+                         │
+                 Frontend Service
+                         │
+                         ▼
+                Frontend Deployment
+                         │
+                 HTTP REST API
+                         │
+                         ▼
+                 Backend Service
+                         │
+                         ▼
+                Backend Deployment
+                         │
+                  MySQL Service
+                         │
+                         ▼
+                 MySQL StatefulSet
+                         │
+                         ▼
+                         PVC
+
 kubernetes-mini-project/
 │
 ├── 00-namespace
