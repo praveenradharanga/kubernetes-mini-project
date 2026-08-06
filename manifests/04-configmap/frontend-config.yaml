@@ -24,8 +24,8 @@ data:
     Doe</td>\n<td>DevOps</td>\n<td>john@company.com</td>\n</tr>\n\n<tr>\n<td>102</td>\n<td>Alice
     Smith</td>\n<td>HR</td>\n<td>alice@company.com</td>\n</tr>\n\n<tr>\n<td>103</td>\n<td>Bob
     Johnson</td>\n<td>Finance</td>\n<td>bob@company.com</td>\n</tr>\n\n</table>\n\n</div>\n\n<footer>\n\nBuilt
-    by <strong>Praveenradharanga</strong><br>\n\nPowered by Kubernetes • Docker •
-    NGINX\n\n</footer>\n\n</body>\n\n</html>\n"
+    by <strong>Praveen Devops Aspirant</strong><br>\n\nPowered by Kubernetes • Docker
+    • NGINX\n\n</footer>\n\n</body>\n\n</html>\n"
 kind: ConfigMap
 metadata:
   name: frontend-html
