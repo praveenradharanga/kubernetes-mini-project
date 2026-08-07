@@ -15,6 +15,6 @@ spec:
   spec:
    containers:
     - name: backend
-      image: praveenradharanga/ems-backend:v1
+      image: praveenradharanga/ems-backend:v3
       ports:
        - containerPort: 5000

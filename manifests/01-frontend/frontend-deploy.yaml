@@ -25,11 +25,19 @@ spec:
         - containerPort: 80
 
         volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html/index.html
-          subPath: index.html
+         - name: frontend-assets #vl name
+           mountPath: /usr/share/nginx/html/index.html
+           subPath: index.html
+
+         - name: frontend-assets #vl name
+           mountPath: /usr/share/nginx/html/app.js
+           subPath: app.js
+
+         - name: frontend-assets #vl name
+           mountPath: /usr/share/nginx/html/style.css
+           subPath: style.css
 
       volumes:
-      - name: html-volume
+      - name: frontend-assets # volume name
         configMap:
-          name: frontend-html
+          name: frontend-assets # cm name

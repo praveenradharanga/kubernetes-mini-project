@@ -26,11 +26,11 @@ app.get("/", (req, res) => {
     res.send("EMS Backend API Running");
 });
 
-app.get("/employees", (req, res) => {
+app.get("/api/employees", (req, res) => {
     res.json(employees);
 });
 
-app.get("/health", (req, res) => {
+app.get("/api/health", (req, res) => {
     res.json({
         status: "UP",
         service: "EMS Backend",

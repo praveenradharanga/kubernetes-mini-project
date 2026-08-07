@@ -1,23 +1,55 @@
-Repo Architecture
-
 kubernetes-mini-project/
+│
 ├── app/
 │   ├── frontend/
-│   │   └── index.html
-│   └── backend/
-│       ├── app.py
-│       ├── Dockerfile
-│       └── requirements.txt
+│   │   ├── index.html
+│   │   ├── app.js
+│   │   └── style.css
+│   │
+│   ├── backend/
+│   │   ├── app.js
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   └── Dockerfile
+│   │
+│   └── database/
+│       └── init.sql
 │
 ├── manifests/
 │   ├── 00-namespace/
+│   │   └── namespace.yaml
+│   │
 │   ├── 01-frontend/
+│   │   ├── frontend-deployment.yaml
+│   │   └── frontend-service.yaml
+│   │
 │   ├── 02-backend/
+│   │   ├── backend-deployment.yaml
+│   │   └── backend-service.yaml
+│   │
 │   ├── 03-mysql/
+│   │   ├── mysql-secret.yaml
+│   │   ├── mysql-pvc.yaml
+│   │   ├── mysql-deployment.yaml
+│   │   └── mysql-service.yaml
+│   │
 │   ├── 04-configmap/
+│   │   └── frontend-config.yaml
+│   │
 │   ├── 05-secret/
+│   │   └── backend-secret.yaml
+│   │
 │   ├── 06-ingress/
+│   │   └── ingress.yaml
+│   │
 │   ├── 07-hpa/
+│   │   └── hpa.yaml
+│   │
 │   └── 08-networkpolicy/
+│       └── network-policy.yaml
 │
-└── README.md
+├── screenshots/
+│
+├── architecture.png
+├── README.md
+└── .gitignore

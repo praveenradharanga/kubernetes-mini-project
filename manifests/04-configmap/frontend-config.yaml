@@ -1,32 +1,80 @@
 apiVersion: v1
 data:
-  index.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta
-    name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n<title>EMS
-    Pro</title>\n\n<style>\n\nbody{\n    margin:0;\n    font-family:Arial,Helvetica,sans-serif;\n
-    \   background:#f4f6f9;\n}\n\nheader{\n    background:#1565c0;\n    color:white;\n
-    \   text-align:center;\n    padding:20px;\n}\n\n.container{\n    width:90%;\n
-    \   margin:auto;\n}\n\n.cards{\n    display:flex;\n    justify-content:space-between;\n
-    \   gap:20px;\n    margin-top:25px;\n}\n\n.card{\n    background:white;\n    flex:1;\n
-    \   padding:20px;\n    text-align:center;\n    border-radius:10px;\n    box-shadow:0
-    2px 8px rgba(0,0,0,.15);\n}\n\n.status{\n    margin:25px 0;\n    font-size:18px;\n}\n\ntable{\n
-    \   width:100%;\n    border-collapse:collapse;\n    background:white;\n    margin-top:20px;\n}\n\nth{\n
-    \   background:#1976d2;\n    color:white;\n}\n\nth,td{\n    padding:12px;\n    border:1px
-    solid #ddd;\n}\n\nfooter{\n    margin-top:30px;\n    background:#263238;\n    color:white;\n
-    \   text-align:center;\n    padding:15px;\n}\n\n.green{\n    color:green;\n}\n\n.orange{\n
-    \   color:orange;\n}\n\n</style>\n\n</head>\n\n<body>\n\n<header>\n\n<h1>EMS Pro</h1>\n\n<h3>Employee
-    Management System</h3>\n\n<p>Kubernetes Mini Project</p>\n\n</header>\n\n<div
-    class=\"container\">\n\n<div class=\"status\">\n\n<strong>Application Status</strong><br><br>\n\nFrontend
-    :\n<span class=\"green\">\U0001F7E2 Running</span>\n\n&nbsp;&nbsp;&nbsp;\n\nBackend
-    :\n<span class=\"orange\">\U0001F7E1 Coming Soon</span>\n\n&nbsp;&nbsp;&nbsp;\n\nDatabase
-    :\n<span class=\"orange\">\U0001F7E1 Coming Soon</span>\n\n</div>\n\n<div class=\"cards\">\n\n<div
-    class=\"card\">\n<h2>120</h2>\nEmployees\n</div>\n\n<div class=\"card\">\n<h2>8</h2>\nDepartments\n</div>\n\n<div
-    class=\"card\">\n<h2>15</h2>\nProjects\n</div>\n\n</div>\n\n<h2>Employee Directory</h2>\n\n<table>\n\n<tr>\n<th>ID</th>\n<th>Name</th>\n<th>Department</th>\n<th>Email</th>\n</tr>\n\n<tr>\n<td>101</td>\n<td>John
-    Doe</td>\n<td>DevOps</td>\n<td>john@company.com</td>\n</tr>\n\n<tr>\n<td>102</td>\n<td>Alice
-    Smith</td>\n<td>HR</td>\n<td>alice@company.com</td>\n</tr>\n\n<tr>\n<td>103</td>\n<td>Bob
-    Johnson</td>\n<td>Finance</td>\n<td>bob@company.com</td>\n</tr>\n\n</table>\n\n</div>\n\n<footer>\n\nBuilt
-    by <strong>Praveen Devops Aspirant</strong><br>\n\nPowered by Kubernetes • Docker
-    • NGINX\n\n</footer>\n\n</body>\n\n</html>\n"
+  app.js: "async function loadHealth() {\n\n    try {\n\n        const response =
+    await fetch(\"/api/health\");\n\n        const data = await response.json();\n\n
+    \       document.getElementById(\"backend-status\").innerHTML =\n            `Backend
+    : <span class=\"running\">\U0001F7E2 ${data.status}</span>`;\n\n    } catch {\n\n
+    \       document.getElementById(\"backend-status\").innerHTML =\n            `Backend
+    : <span class=\"down\">\U0001F534 DOWN</span>`;\n    }\n\n}\n\nasync function
+    loadEmployees() {\n\n    try {\n\n        const response = await fetch(\"/api/employees\");\n\n
+    \       const employees = await response.json();\n\n        const table = document.getElementById(\"employee-table\");\n\n
+    \       table.innerHTML = \"\";\n\n        employees.forEach(emp => {\n\n            table.innerHTML
+    += `\n                <tr>\n                    <td>${emp.id}</td>\n                    <td>${emp.name}</td>\n
+    \                   <td>${emp.department}</td>\n                </tr>\n            `;\n\n
+    \       });\n\n    } catch {\n\n        console.log(\"Unable to load employees\");\n\n
+    \   }\n\n}\n\nloadHealth();\n\nloadEmployees();\n"
+  index.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n
+    \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n
+    \   <title>EMS Pro</title>\n\n    <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n\n<body>\n\n<header>\n
+    \   <h1>Employee Management System</h1>\n    <p>Kubernetes Mini Project</p>\n</header>\n\n<div
+    class=\"status\">\n\n    <div id=\"frontend-status\">\n        Frontend :\n        <span
+    class=\"running\">\U0001F7E2 Running</span>\n    </div>\n\n    <div id=\"backend-status\">\n
+    \       Backend :\n        <span class=\"loading\">\U0001F7E1 Checking...</span>\n
+    \   </div>\n\n    <div id=\"database-status\">\n        Database :\n        <span
+    class=\"loading\">\U0001F7E1 Coming Soon</span>\n    </div>\n\n</div>\n\n<h2>Employees</h2>\n\n<table>\n\n<thead>\n<tr>\n<th>ID</th>\n<th>Name</th>\n<th>Department</th>\n</tr>\n</thead>\n\n<tbody
+    id=\"employee-table\">\n\n</tbody>\n\n</table>\n\n<script src=\"app.js\"></script>\n\n</body>\n</html>\n"
+  style.css: |
+    body{
+        font-family:Arial,Helvetica,sans-serif;
+        margin:40px;
+        background:#f4f6f9;
+    }
+
+    header{
+        text-align:center;
+        background:#1565c0;
+        color:white;
+        padding:20px;
+    }
+
+    .status{
+        margin:25px 0;
+        padding:15px;
+        background:white;
+        border-radius:8px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        background:white;
+    }
+
+    th,td{
+        border:1px solid #ddd;
+        padding:12px;
+    }
+
+    th{
+        background:#1565c0;
+        color:white;
+    }
+
+    .running{
+        color:green;
+        font-weight:bold;
+    }
+
+    .loading{
+        color:orange;
+        font-weight:bold;
+    }
+
+    .down{
+        color:red;
+        font-weight:bold;
+    }
 kind: ConfigMap
 metadata:
-  name: frontend-html
+  name: frontend-assets
   namespace: employee-app
