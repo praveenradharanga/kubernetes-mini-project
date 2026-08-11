@@ -1,0 +1,19 @@
+                    MySQL Pod
+                        │
+                        ▼
+                ┌───────────────┐
+                │ MySQL Container│
+                │   mysql:8.4   │
+                └───────┬───────┘
+                        │
+          ┌─────────────┼──────────────┐
+          │             │              │
+          ▼             ▼              ▼
+       Secret       ConfigMap         PVC
+          │             │              │
+    root-password     init.sql       DB data
+          │             │              │
+          ▼             ▼              ▼
+MYSQL_ROOT_PASSWORD  /docker-       /var/lib/
+     (env name)      entrypoint-      mysql
+                    initdb.d

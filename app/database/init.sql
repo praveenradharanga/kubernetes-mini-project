@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(100) NOT NULL
+);
+
+INSERT INTO employees (id, name, department)
+VALUES
+    (101, 'Praveen', 'DevOps Engineer'),
+    (102, 'Vara', 'Cloud Engineer'),
+    (105, 'Chandan', 'Network Engineer'),
+    (107, 'Varun', 'Streaming Analyst'),
+    (108, 'Nandeesha', 'Developer'),
+    (109, 'Chandan Singh', 'Technician'),
+    (103, 'Pranay', 'Data Analyst'),
+    (104, 'Madhan', 'Data Analyst'),
+    (106, 'Chandru', 'Analyst');

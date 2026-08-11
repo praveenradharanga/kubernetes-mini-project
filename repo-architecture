@@ -53,3 +53,32 @@ kubernetes-mini-project/
 ├── architecture.png
 ├── README.md
 └── .gitignore
+
+
+---------------------------------------------
+Project structure
+
+Frontend
+├── Deployment
+├── Service
+└── ConfigMap
+       └── index.html
+
+Backend
+├── Docker Image
+├── Deployment
+└── Service
+
+MySQL
+├── Deployment
+├── Service
+├── ConfigMap
+│    └── init.sql
+├── Secret
+│    └── DB password
+└── PVC
+     └── Persistent database data
+
+Ingress
+└── /     → frontend-service
+└── /api  → backend-service

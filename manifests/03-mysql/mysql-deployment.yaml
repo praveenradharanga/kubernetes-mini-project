@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mysql
+  namespace: employee-app
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mysql
+
+  template:
+    metadata:
+      labels:
+        app: mysql
+
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.4
+
+          ports:
+            - containerPort: 3306
+
+          env:
+            - name: MYSQL_ROOT_PASSWORD ## env variable name inside the container
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret    # # Kubernetes Secret name
+                  key: root-password    # Key inside that Secret
+
+            - name: MYSQL_DATABASE
+              value: employee_db
+
+          volumeMounts:
+            # Persistent database storage
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+
+            # Database initialization script
+            - name: mysql-init
+              mountPath: /docker-entrypoint-initdb.d
+
+      volumes:
+        # PVC for persistent MySQL data
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
+        # ConfigMap containing init.sql
+        - name: mysql-init
+          configMap:
+            name: mysql-init

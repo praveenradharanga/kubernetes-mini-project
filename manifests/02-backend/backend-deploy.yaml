@@ -1,20 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
- name: backend
- namespace: employee-app
+  name: backend
+  namespace: employee-app
+
 spec:
- replicas: 1
- selector:
-  matchLabels:
-   app: backend
- template:
-  metadata:
-   labels:
-    app: backend
-  spec:
-   containers:
-    - name: backend
-      image: praveenradharanga/ems-backend:v3
-      ports:
-       - containerPort: 5000
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+        - name: backend
+          image: praveenradharanga/ems-backend:v5
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: DB_HOST
+              value: mysql-service
+
+            - name: DB_USER
+              value: root
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: root-password
+
+            - name: DB_NAME
+              value: employee_db
